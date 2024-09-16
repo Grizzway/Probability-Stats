@@ -10,5 +10,7 @@ public class Tests {
 		}
 		
 		System.out.print(mean.computeMean(listOfNumbers));
+
+		System.out.println("Reece Was Here");
 	}
 }
