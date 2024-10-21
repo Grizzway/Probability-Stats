@@ -1,18 +1,25 @@
 package PokemonAssignment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
 public class PokemonCards {
     public static Random random = new Random();
     public static ArrayList<Pokemon> pokemonCards;
-    private static final Pokemon Charmander = new Pokemon("Charmander", 50, PokemonCards::Scratch, PokemonCards::Ember);
-    private final static Pokemon Pikachu = new Pokemon("Pikachu", 60, PokemonCards::IronTail);
-    private final static Pokemon Arceus = new Pokemon("Arceus", 80, PokemonCards::BreakGround);
-    private final static Pokemon Chatot = new Pokemon("Chatot", 70, PokemonCards::Tackle, PokemonCards::WaveSplash );
-    private final static Pokemon Buizel = new Pokemon("Buizel", 70, PokemonCards::ACapella, PokemonCards::Gust );
-    private final static Pokemon Mudkip = new Pokemon("Mudkip", 70, PokemonCards::QuickAttack);
+    private static final Pokemon Charmander = new Pokemon("Charmander", 50, Pokemon.Type.Fire,
+            new ArrayList<Ability>(Arrays.asList(new Ability("Scratch", 1, PokemonCards::Scratch), new Ability("Ember", 2, PokemonCards::Ember))));
+    private final static Pokemon Pikachu = new Pokemon("Pikachu", 60, Pokemon.Type.Lightning,
+            new ArrayList<Ability>(Arrays.asList(new Ability("Iron Tail", 2, PokemonCards::IronTail))));
+    private final static Pokemon Arceus = new Pokemon("Arceus", 80, Pokemon.Type.Fighting,
+            new ArrayList<Ability>(Arrays.asList(new Ability("Break Ground",3, PokemonCards::BreakGround))));
+    private final static Pokemon Chatot = new Pokemon("Chatot", 70, Pokemon.Type.Colorless,
+            new ArrayList<Ability>(Arrays.asList(new Ability("Tackle", 1, PokemonCards::Tackle), new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
+    private final static Pokemon Buizel = new Pokemon("Buizel", 70, Pokemon.Type.Water,
+            new ArrayList<Ability>(Arrays.asList(new Ability("A Capella", 1, PokemonCards::ACapella), new Ability("Gust", 1, PokemonCards::Gust))));
+    private final static Pokemon Mudkip = new Pokemon("Mudkip", 70, Pokemon.Type.Water,
+            new ArrayList<Ability>(Arrays.asList(new Ability("Quick Attack", 1, PokemonCards::QuickAttack))));
     static {
         pokemonCards = new ArrayList<>() {{
             add(Charmander);

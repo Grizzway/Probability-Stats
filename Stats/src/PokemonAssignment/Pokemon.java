@@ -1,5 +1,6 @@
 package PokemonAssignment;
 
+import java.util.ArrayList;
 import java.util.function.BiFunction;
 
 public class Pokemon extends Card {
@@ -7,12 +8,9 @@ public class Pokemon extends Card {
     private int hp;
     private int attachedEnergy = 0;
     private Type pokemonType;
-    private BiFunction<Player, Player, Void> action1;
-    private String actionName1;
-    private BiFunction<Player, Player, Void> action2;
-    private String actionName2;
+    private ArrayList<Ability> abilities = new ArrayList<>();
 
-    private enum Type{
+    public enum Type{
         Fire,
         Water,
         Colorless,
@@ -23,17 +21,12 @@ public class Pokemon extends Card {
 
     }
 
-    public Pokemon(String name, int hp, BiFunction<Player, Player, Void> action){
+    public Pokemon(String name, int hp, Type pokemonType, ArrayList<Ability> abilities){
         this.name = name;
         this.hp = hp;
-        this.action1 = action;
+        this.abilities = abilities;
     }
-    public Pokemon(String name, int hp, BiFunction<Player, Player, Void> action1, BiFunction<Player, Player, Void> action2){
-        this.name = name;
-        this.hp = hp;
-        this.action1 = action1;
-        this.action2 = action2;
-    }
+
 
 
     public Pokemon(String name, int hp){
@@ -62,6 +55,6 @@ public class Pokemon extends Card {
 
     public void DisplayAbilities(){
         System.out.println(name + "'s abilities:");
-        System.out.println("1. " + action1);
+
     }
 }
