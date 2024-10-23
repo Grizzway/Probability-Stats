@@ -2,24 +2,41 @@ package PokemonAssignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 
 public class PokemonCards {
     public static Random random = new Random();
     public static ArrayList<Pokemon> pokemonCards;
+
     private static final Pokemon Charmander = new Pokemon("Charmander", 50, Pokemon.Type.Fire,
-            new ArrayList<Ability>(Arrays.asList(new Ability("Scratch", 1, PokemonCards::Scratch), new Ability("Ember", 2, PokemonCards::Ember))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("Scratch", 1, PokemonCards::Scratch),
+                    new Ability("Ember", 2, PokemonCards::Ember))));
+
     private final static Pokemon Pikachu = new Pokemon("Pikachu", 60, Pokemon.Type.Lightning,
-            new ArrayList<Ability>(Arrays.asList(new Ability("Iron Tail", 2, PokemonCards::IronTail))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("Iron Tail", 2, PokemonCards::IronTail))));
+
     private final static Pokemon Arceus = new Pokemon("Arceus", 80, Pokemon.Type.Fighting,
-            new ArrayList<Ability>(Arrays.asList(new Ability("Break Ground",3, PokemonCards::BreakGround))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("Break Ground",3, PokemonCards::BreakGround))));
+
     private final static Pokemon Chatot = new Pokemon("Chatot", 70, Pokemon.Type.Colorless,
-            new ArrayList<Ability>(Arrays.asList(new Ability("Tackle", 1, PokemonCards::Tackle), new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("Tackle", 1, PokemonCards::Tackle),
+                    new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
+
     private final static Pokemon Buizel = new Pokemon("Buizel", 70, Pokemon.Type.Water,
-            new ArrayList<Ability>(Arrays.asList(new Ability("A Capella", 1, PokemonCards::ACapella), new Ability("Gust", 1, PokemonCards::Gust))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("A Capella", 1, PokemonCards::ACapella),
+                    new Ability("Gust", 1, PokemonCards::Gust))));
+
     private final static Pokemon Mudkip = new Pokemon("Mudkip", 70, Pokemon.Type.Water,
-            new ArrayList<Ability>(Arrays.asList(new Ability("Quick Attack", 1, PokemonCards::QuickAttack))));
+            new ArrayList<Ability>(Arrays.asList(
+                    new Ability("Quick Attack", 1, PokemonCards::QuickAttack))));
+
     static {
         pokemonCards = new ArrayList<>() {{
             add(Charmander);
@@ -123,19 +140,91 @@ public class PokemonCards {
         }
         System.out.println(attacker.getName() + " uses Wave Splash!");
         attacked.setHp(attacked.getHp()-20);
-        System.out.println(self.getName() + "'s " + attacker.getName() + " has hit " + attacked.getName() + " with " + 10 + " damage!");
+        System.out.println(self.getName() + "'s " + attacker.getName() + " has hit " + attacked.getName() + " with " + 20 + " damage!");
         return null;
     }
 
+    /**
+     * This ability allows the user to pull up to 3 Pokemon cards from their Deck and place them into their bench.
+     * The deck is then shuffled after this ability.
+     */
     private static Void ACapella(Player opponent, Player self){
+        Pokemon attacker = (Pokemon) self.active;
+        Pokemon attacked = (Pokemon) opponent.active;
+        if(attacker.getEnergy() < 1 ){
+            System.out.println("You do not have enough attached energy to use this move!");
+            return null;
+        }
+
+        System.out.println(attacker.getName() + " uses Wave A Capella!");
+        int cardsFound = 0;
+        ArrayList<Card> foundCards = new ArrayList<>();
+        for(Card card : self.deck){
+            if(card instanceof Pokemon && cardsFound < 3){
+                cardsFound++;
+                foundCards.add(card);
+                self.deck.remove(card);
+            }
+        }
+
+        if(cardsFound == 0){
+            System.out.println("No Pokemon cards were found in your deck!");
+            return null;
+        }
+
+        int currentBenchSize = self.bench.size();
+        if(currentBenchSize == 5){
+            self.hand.addAll(foundCards);
+            System.out.println("Your bench is full! Placing " + cardsFound + " cards into your hand.%n");
+        }
+        else if(currentBenchSize < 5){
+            int cardsToAdd = 5-currentBenchSize;
+            for(int i = 0; i < cardsToAdd; i++){
+                self.bench.add(foundCards.get(0));
+                foundCards.remove(0);
+            }
+
+            if(!foundCards.isEmpty()){
+                self.hand.addAll(foundCards);
+            }
+
+            System.out.println("Found " + cardsFound + " cards and Added " + (cardsToAdd) + " cards to your bench. "
+                                + (cardsFound-cardsToAdd) + "cards were placed into your hand.");
+        }
+        Collections.shuffle(self.deck);
         return null;
     }
 
     private static Void Gust(Player opponent, Player self){
+        Pokemon attacker = (Pokemon) self.active;
+        Pokemon attacked = (Pokemon) opponent.active;
+        if(attacker.getEnergy() < 1 ){
+            System.out.println("You do not have enough attached energy to use this move!");
+            return null;
+        }
+        System.out.println(attacker.getName() + " uses Gust!");
+        attacked.setHp(attacked.getHp()-20);
+        System.out.println(self.getName() + "'s " + attacker.getName() + " has hit " + attacked.getName() + " with " + 20 + " damage!");
         return null;
     }
 
     private static Void QuickAttack(Player opponent, Player self){
+        Pokemon attacker = (Pokemon) self.active;
+        Pokemon attacked = (Pokemon) opponent.active;
+        if(attacker.getEnergy() < 1 ){
+            System.out.println("You do not have enough attached energy to use this move!");
+            return null;
+        }
+
+        int bonusDmg = 0;
+        int coin = random.nextInt(2);
+        //Heads is 0
+        if(coin == 0)
+            bonusDmg = 10;
+
+        System.out.println(attacker.getName() + " uses Quick Attack!");
+        attacked.setHp(attacked.getHp()-(10+bonusDmg));
+        System.out.println(self.getName() + "'s " + attacker.getName() + " has hit " + attacked.getName() + " with " + (10+bonusDmg) + " damage!");
         return null;
     }
 }
