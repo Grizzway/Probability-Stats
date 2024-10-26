@@ -12,7 +12,6 @@ public class TrainerCards {
     /**
      * Did not include implementation for the Rare Candy since none of the Pokemon I have are evolutions.
      * I also did not want to implement evolutions in order to keep it simple.
-     *
      * This card is only meant to be used in the monte carlo simulation and not meant to be played in the game.
      */
     private final static Trainer RareCandy = new Trainer("Rare Candy", (Player opponent, Player self) -> {

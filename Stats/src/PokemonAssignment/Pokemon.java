@@ -28,6 +28,12 @@ public class Pokemon extends Card {
         this.hp = hp;
     }
 
+    public Pokemon(Pokemon pokemon) {
+        this.name = pokemon.name;
+        this.hp = pokemon.hp;
+        this.abilities = pokemon.abilities;
+    }
+
 
     public String getName(){
         return name;

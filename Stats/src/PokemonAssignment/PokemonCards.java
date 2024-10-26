@@ -20,12 +20,12 @@ public class PokemonCards {
             new ArrayList<>(List.of(
                     new Ability("Break Ground", 3, PokemonCards::BreakGround))));
 
-    private final static Pokemon Chatot = new Pokemon("Chatot", 70,
+    private final static Pokemon Buizel = new Pokemon("Buizel", 70,
             new ArrayList<>(Arrays.asList(
                     new Ability("Tackle", 1, PokemonCards::Tackle),
                     new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
 
-    private final static Pokemon Buizel = new Pokemon("Buizel", 70,
+    private final static Pokemon Chatot = new Pokemon("Chatot", 70,
             new ArrayList<>(Arrays.asList(
                     new Ability("A Capella", 1, PokemonCards::ACapella),
                     new Ability("Gust", 1, PokemonCards::Gust))));

@@ -168,7 +168,7 @@ public class CardGame {
 
                 ResetDeckAndHand();
             }
-            System.out.printf("%.5f%n", (double)totalSuccess/timesToRun);
+            System.out.printf("Average Probability for %d Candy(s):  %.5f%n", candies ,(double)totalSuccess/timesToRun);
         }
     }
 
@@ -194,14 +194,14 @@ public class CardGame {
         DrawHand(player2, player1);
 
         System.out.println(player1Name + ", who will you play as your active?");
-        Optional<Card> chosen1Card = DisplayPokemonInHand(player1);
+        Optional<Card> chosen1Card = DisplayPokemonInHand(player1, false);
         chosen1Card.ifPresent(card -> {
             addPokemonToActiveFromHand(player1, card);
         });
 
 
         System.out.println(player2Name + ", who will you play as your active?");
-        Optional<Card> chosen2Card = DisplayPokemonInHand(player2);
+        Optional<Card> chosen2Card = DisplayPokemonInHand(player2, false);
         chosen2Card.ifPresent(card -> {
             addPokemonToActiveFromHand(player2, card);
         });
@@ -222,7 +222,8 @@ public class CardGame {
     public void CreateDeck(Player player){
         //Add 5 random Pokemon cards
         for(int i = 0; i < 5; i++){
-            player.deck.add(PokemonCards.pokemonCards.get(random.nextInt(PokemonCards.pokemonCards.size())));
+            Pokemon pokemon = PokemonCards.pokemonCards.get(random.nextInt(PokemonCards.pokemonCards.size()));
+            player.deck.add(new Pokemon(pokemon));
         }
         //Add 40 random Trainer cards
         for(int i = 0; i < 40; i++){
@@ -248,7 +249,7 @@ public class CardGame {
         int timesRedrawn = 0;
         do {
             for (int i = 0; i < 7; i++) {
-                int cardSeedIndex = rng.nextInt(player1.deck.size());
+                int cardSeedIndex = rng.nextInt(self.deck.size());
                 self.hand.add(self.deck.get(cardSeedIndex));
                 self.deck.remove(cardSeedIndex);
             }
@@ -405,25 +406,22 @@ public class CardGame {
             System.out.println(self.getName() + " has knocked out " + oppActive.getName() + "!");
             opponent.discardPile.add(oppActive);
 
-            if(!opponent.bench.isEmpty()){
-                System.out.println(opponent.getName() + "! Pick a Pokemon from your bench to be your new active!");
-                Optional<Card> chosenPokemonCard = DisplayPokemonInBench(opponent);
-                if(chosenPokemonCard.isEmpty()){
-                    System.out.println("No Pokemon in Bench! Pick from your hand!");
-                    chosenPokemonCard = DisplayPokemonInHand(opponent);
-                    if(chosenPokemonCard.isPresent()){
-                        opponent.active = chosenPokemonCard.get();
-                    }
-                    else{
-                        System.out.println("No Pokemon in Hand either!");
-                        ((Pokemon) opponent.active).setName("No Active!");
-                    }
+            System.out.println(opponent.getName() + "! Pick a Pokemon from your bench to be your new active!");
+            Optional<Card> chosenPokemonCard = DisplayPokemonInBench(opponent);
+            if(chosenPokemonCard.isEmpty()){
+                System.out.println("No Pokemon in Bench! Pick from your hand!");
+                chosenPokemonCard = DisplayPokemonInHand(opponent, false);
+                if(chosenPokemonCard.isPresent()){
+                    addPokemonToActiveFromHand(opponent, chosenPokemonCard.get());
                 }
                 else{
-                    addPokemonToActiveFromBench(opponent, chosenPokemonCard.get());
+                    System.out.println("No Pokemon in Hand either!");
+                    ((Pokemon) opponent.active).setName("No Active!");
                 }
             }
-
+            else{
+                addPokemonToActiveFromBench(opponent, chosenPokemonCard.get());
+            }
         }
     }
 
@@ -461,7 +459,20 @@ public class CardGame {
      * @param player The player whose hand is being displayed.
      * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
      */
-    public Optional<Card> DisplayPokemonInHand(Player player){
+    public Optional<Card> DisplayPokemonInHand(Player player){{
+        return DisplayPokemonInHand(player, true);
+    }}
+
+    /**
+     * Displays the available Pokemon cards in the player's hand.
+     * The player can select a Pokemon card by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param player The player whose hand is being displayed.
+     * @param allowGoBack Allow the player to go back in the menu.
+     * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
+     */
+    public Optional<Card> DisplayPokemonInHand(Player player, boolean allowGoBack){
         System.out.println("Available Pokemon in Hand:\n");
         ArrayList<Card> pokemonCards = new ArrayList<>();
         for (int i = 0; i < player.hand.size(); i++){
@@ -472,12 +483,13 @@ public class CardGame {
         }
 
         if (!pokemonCards.isEmpty()) {
-            System.out.println("\n0. Go Back.");
+            if(allowGoBack)
+                System.out.println("\n0. Go Back.");
             while (true) {
                 if (gameInput.hasNextInt()) {
                     int selection = gameInput.nextInt();
 
-                    if (selection == 0) {
+                    if (selection == 0 && allowGoBack) {
                         return Optional.empty();
                     }
                     else if(selection > 0 && selection <= pokemonCards.size()){
@@ -505,6 +517,19 @@ public class CardGame {
      * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
      */
     public Optional<Card> DisplayPokemonInBench(Player player){
+        return DisplayPokemonInBench(player, true);
+    }
+
+    /**
+     * Displays the available Pokemon cards in the player's bench.
+     * The player can select a Pokemon card by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param player The player whose bench is being displayed.
+     * @param allowGoBack Whether you want the use to go back in the menu or not.
+     * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
+     */
+    public Optional<Card> DisplayPokemonInBench(Player player, boolean allowGoBack){
         System.out.println("Available Pokemon in Bench:\n");
         ArrayList<Card> pokemonCards = new ArrayList<>();
         for (int i = 0; i < player.bench.size(); i++){
@@ -515,12 +540,13 @@ public class CardGame {
         }
 
         if (!pokemonCards.isEmpty()) {
-            System.out.println("\n0. Go Back.");
+            if(allowGoBack)
+                System.out.println("\n0. Go Back.");
             while (true) {
                 if (gameInput.hasNextInt()) {
                     int selection = gameInput.nextInt();
 
-                    if (selection == 0) {
+                    if (selection == 0 && allowGoBack) {
                         return Optional.empty();
                     }
                     else if(selection > 0 && selection <= pokemonCards.size()){
@@ -791,8 +817,6 @@ public class CardGame {
         SetupGame();
         boolean isWinner = false;
         while(!isWinner){
-            System.out.println(currentPlayer.getName());
-            System.out.println(currentOpponent.getName());
             isWinner = DisplayOptions();
         }
 
