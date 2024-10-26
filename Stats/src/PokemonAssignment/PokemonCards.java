@@ -1,9 +1,6 @@
 package PokemonAssignment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 
 public class PokemonCards {
@@ -11,30 +8,30 @@ public class PokemonCards {
     public static ArrayList<Pokemon> pokemonCards;
 
     private static final Pokemon Charmander = new Pokemon("Charmander", 50,
-            new ArrayList<Ability>(Arrays.asList(
+            new ArrayList<>(Arrays.asList(
                     new Ability("Scratch", 1, PokemonCards::Scratch),
                     new Ability("Ember", 2, PokemonCards::Ember))));
 
     private final static Pokemon Pikachu = new Pokemon("Pikachu", 60,
-            new ArrayList<Ability>(Arrays.asList(
+            new ArrayList<>(List.of(
                     new Ability("Iron Tail", 2, PokemonCards::IronTail))));
 
     private final static Pokemon Arceus = new Pokemon("Arceus", 80,
-            new ArrayList<Ability>(Arrays.asList(
-                    new Ability("Break Ground",3, PokemonCards::BreakGround))));
+            new ArrayList<>(List.of(
+                    new Ability("Break Ground", 3, PokemonCards::BreakGround))));
 
     private final static Pokemon Chatot = new Pokemon("Chatot", 70,
-            new ArrayList<Ability>(Arrays.asList(
+            new ArrayList<>(Arrays.asList(
                     new Ability("Tackle", 1, PokemonCards::Tackle),
                     new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
 
     private final static Pokemon Buizel = new Pokemon("Buizel", 70,
-            new ArrayList<Ability>(Arrays.asList(
+            new ArrayList<>(Arrays.asList(
                     new Ability("A Capella", 1, PokemonCards::ACapella),
                     new Ability("Gust", 1, PokemonCards::Gust))));
 
     private final static Pokemon Mudkip = new Pokemon("Mudkip", 70,
-            new ArrayList<Ability>(Arrays.asList(
+            new ArrayList<>(List.of(
                     new Ability("Quick Attack", 1, PokemonCards::QuickAttack))));
 
     static {
@@ -189,7 +186,7 @@ public class PokemonCards {
 
     /**
      * Executes the A Capella ability for the active Pokémon. This ability requires at least 1 energy.
-     * The player can pull up to 3 Pokémon cards from their deck to place on their bench, and the deck is shuffled afterwards.
+     * The player can pull up to 3 Pokémon cards from their deck to place on their bench, and the deck is shuffled afterward.
      *
      * @param opponent The opposing player.
      * @param self The player performing the ability.
@@ -197,7 +194,6 @@ public class PokemonCards {
      */
     private static Void ACapella(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
-        Pokemon attacked = (Pokemon) opponent.active;
         if(attacker.getEnergy() < 1 ){
             System.out.println("You do not have enough attached energy to use this move!");
             return null;
