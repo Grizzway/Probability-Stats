@@ -48,6 +48,14 @@ public class PokemonCards {
         }};
     }
 
+    /**
+     * Executes the Scratch move for the active Pokémon. The move requires at least 1 energy.
+     * If the attacker has sufficient energy, it deals 10 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void Scratch(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -62,6 +70,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Ember move for the active Pokémon. The move requires at least 2 energy.
+     * If the attacker has sufficient energy, it deals 30 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void Ember(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -77,14 +93,17 @@ public class PokemonCards {
     }
 
     /**
-     * A move for Pikachu. When this attack is triggered, the player flips a coin until they get tails
-     * This attack does 20 damage for every instance of heads.
-     * This attack requires 1 energy.
+     * Executes the Iron Tail move for the active Pokémon. The move requires at least 2 energy.
+     * The player flips a coin until they get tails, dealing 20 damage for each heads flipped.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
      */
     private static Void IronTail(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
-        if(attacker.getEnergy() < 1 ){
+        if(attacker.getEnergy() < 2 ){
             System.out.println("You do not have enough attached energy to use this move!");
             return null;
         }
@@ -104,6 +123,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Break Ground move for the active Pokémon. The move requires at least 3 energy.
+     * If the attacker has sufficient energy, it deals 30 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void BreakGround(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -118,6 +145,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Tackle move for the active Pokémon. The move requires at least 1 energy.
+     * If the attacker has sufficient energy, it deals 10 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void Tackle(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -131,6 +166,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Wave Splash move for the active Pokémon. The move requires at least 2 energy.
+     * If the attacker has sufficient energy, it deals 20 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void WaveSplash(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -145,8 +188,12 @@ public class PokemonCards {
     }
 
     /**
-     * This ability allows the user to pull up to 3 Pokemon cards from their Deck and place them into their bench.
-     * The deck is then shuffled after this ability.
+     * Executes the A Capella ability for the active Pokémon. This ability requires at least 1 energy.
+     * The player can pull up to 3 Pokémon cards from their deck to place on their bench, and the deck is shuffled afterwards.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the ability.
+     * @return Always returns null.
      */
     private static Void ACapella(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
@@ -195,6 +242,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Gust move for the active Pokémon. The move requires at least 1 energy.
+     * If the attacker has sufficient energy, it deals 20 damage to the opponent's active Pokémon.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void Gust(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;
@@ -208,6 +263,14 @@ public class PokemonCards {
         return null;
     }
 
+    /**
+     * Executes the Quick Attack move for the active Pokémon. The move requires at least 1 energy.
+     * If the attacker has sufficient energy, it deals 10 damage plus an additional 10 damage if a coin flip results in heads.
+     *
+     * @param opponent The opposing player.
+     * @param self The player performing the move.
+     * @return Always returns null.
+     */
     private static Void QuickAttack(Player opponent, Player self){
         Pokemon attacker = (Pokemon) self.active;
         Pokemon attacked = (Pokemon) opponent.active;

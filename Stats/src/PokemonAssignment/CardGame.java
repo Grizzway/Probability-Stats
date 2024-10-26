@@ -19,7 +19,10 @@ public class CardGame {
      */
 
     /**
+     * Populates player1's deck with a specified number of Charmander cards and fills the
+     * remaining deck slots with Energy cards for a total of 60 cards. The deck is then shuffled.
      *
+     * @param charmanderCount The number of Charmander cards to add to the deck.
      */
     private void FillDeckMonteCarlo(int charmanderCount){
         for(int i = 0; i < 60 - charmanderCount; i++){
@@ -32,7 +35,11 @@ public class CardGame {
     }
 
     /**
+     * Populates player1's deck with a specified number of Charmander and Rare Candy cards,
+     * filling the remaining slots with Energy cards for a total of 60 cards. The deck is then shuffled.
      *
+     * @param rareCandyCount  The number of Rare Candy cards to add to the deck.
+     * @param charmanderCount The number of Charmander cards to add to the deck.
      */
     private void FillDeckMonteCarloPrizes(int rareCandyCount, int charmanderCount){
         for(int i = 0; i < 60 - rareCandyCount - charmanderCount; i++){
@@ -47,10 +54,12 @@ public class CardGame {
         Collections.shuffle(player1.deck);
     }
 
-    //Returns true if there is a pokemon
-    //Returns false if no pokemon
+
     /**
+     * Checks if the player's hand contains at least one Pokemon card.
      *
+     * @param player The player whose hand is being checked.
+     * @return true if there is a Pokemon card in the hand; false otherwise.
      */
     private boolean CheckForRedraw(Player player) {
         for(Card card : player.hand) {
@@ -61,7 +70,10 @@ public class CardGame {
     }
 
     /**
+     * Verifies if the player's prize cards contain the specified number of Trainer (Rare Candy) cards.
      *
+     * @param expectedAmount The expected number of Trainer cards in the prizes.
+     * @return true if the actual amount of Trainer cards in prizes matches the expected amount; false otherwise.
      */
     private boolean CheckPrizesForAllCandies(int expectedAmount){
         int actualAmount = 0;
@@ -74,7 +86,7 @@ public class CardGame {
     }
 
     /**
-     *
+     * Clears the player's deck, hand, and prize cards to reset for a new simulation run.
      */
     private void ResetDeckAndHand(){
         player1.deck.clear();
@@ -82,6 +94,11 @@ public class CardGame {
         player1.prizes.clear();
     }
 
+    /**
+     * Draws a hand of 7 random cards for the specified player from the deck.
+     *
+     * @param player The player who will receive a new hand of 7 cards.
+     */
     private void DrawHand(Player player){
         Random rng = new Random();
         for(int i = 0; i < 7; i++){
@@ -92,7 +109,10 @@ public class CardGame {
     }
 
     /**
+     * Runs a Monte Carlo simulation to determine the probability of drawing at least one Pokemon card in a hand of 7 cards.
      *
+     * @param timesToRun The number of simulation runs to perform.
+     * @return The probability of drawing at least one Pokemon card in a hand, as a double.
      */
     public double MonteCarloOnePokemon(int timesToRun){
         int totalSuccess = 0;
@@ -109,7 +129,10 @@ public class CardGame {
     }
 
     /**
+     * Runs a Monte Carlo simulation across varying numbers of Charmander cards in the deck to determine the probability
+     * of drawing at least one Pokemon in a hand of 7 cards.
      *
+     * @param timesToRun The number of simulation runs for each Charmander count.
      */
     public void MonteCarloEngine(int timesToRun){
         for(int charmanders = 0; charmanders < 60; charmanders++){
@@ -128,7 +151,10 @@ public class CardGame {
     }
 
     /**
+     * Runs a Monte Carlo simulation across varying numbers of Rare Candy cards in the deck to determine the probability
+     * of having all specified candies in the player's prize cards.
      *
+     * @param timesToRun The number of simulation runs for each Rare Candy count.
      */
     public void MonteCarloPrizes(int timesToRun){
         for(int candies = 1; candies <= 4; candies++){
@@ -150,6 +176,13 @@ public class CardGame {
     * Game logic
     * */
 
+    /**
+     * Initializes two players for the game with the specified names, creates their decks,
+     * draws initial hands for both players, and allows each to choose an active Pokemon.
+     *
+     * @param player1Name The name of the first player.
+     * @param player2Name The name of the second player.
+     */
     public void CreatePlayers(String player1Name, String player2Name){
         player1 = new Player(player1Name);
         player2 = new Player(player2Name);
@@ -181,8 +214,11 @@ public class CardGame {
     }
 
     /**
-    *
-    */
+     * Creates a deck for the specified player, consisting of a combination of Pokemon, Trainer, and Energy cards,
+     * and then shuffles the deck.
+     *
+     * @param player The player whose deck will be created.
+     */
     public void CreateDeck(Player player){
         //Add 5 random Pokemon cards
         for(int i = 0; i < 5; i++){
@@ -201,7 +237,11 @@ public class CardGame {
     }
 
     /**
+     * Draws a hand of 7 cards for the specified player, ensuring that the hand contains at least one Pokemon card.
+     * If no Pokemon is drawn initially, the hand is redrawn, with the opponent drawing a card each time.
      *
+     * @param self The player drawing their hand.
+     * @param opponent The opposing player, who draws a card each time a hand is redrawn.
      */
     private void DrawHand(Player self, Player opponent){
         Random rng = new Random();
@@ -224,7 +264,10 @@ public class CardGame {
     }
 
     /**
+     * Draws 6 prize cards from the player's deck and adds them to their prize pile.
+     * The cards are removed from the deck in the process.
      *
+     * @param player The player from whom the prizes are drawn.
      */
     private void DrawPrizes(Player player){
         for(int i = 0; i < 6; i++){
@@ -233,7 +276,14 @@ public class CardGame {
         }
     }
 
-
+    /**
+     * Adds a specified Pokemon card to the player's bench if there is space available.
+     * If the bench is full (5 Pokemon), a message is displayed indicating that no more Pokemon can be added.
+     * The Pokemon card is removed from the player's hand.
+     *
+     * @param player The player whose bench is being added to.
+     * @param pokemon The Pokemon card to be added to the bench.
+     */
     public void addToBench(Player player, Card pokemon){
         if(player.bench.size() == 5){
             System.out.println("Bench is full! Only 5 Pokemon may be on the bench at a time!");
@@ -244,6 +294,15 @@ public class CardGame {
         }
     }
 
+    /**
+     * Attaches an Energy card from the player's hand to a specified Pokemon.
+     * If an Energy card is available, it is removed from the hand and added to the Pokemon's energy count.
+     * A message is printed to confirm the attachment. If no Energy cards are available, a message is displayed.
+     *
+     * @param player The player who is attaching the energy.
+     * @param pokemon The Pokemon to which the Energy is being attached.
+     * @return True if the energy was successfully attached; false otherwise.
+     */
     public boolean attachEnergy(Player player, Pokemon pokemon){
         Optional<Card> energyCard = player.hand.stream().filter(card -> card instanceof Energy).findAny();
         if(energyCard.isPresent()){
@@ -257,6 +316,15 @@ public class CardGame {
         return false;
     }
 
+    /**
+     * Switches the active Pokemon for another specified Pokemon card.
+     * The switch can only occur if the player has at least one Energy card in their hand.
+     * If successful, the current active Pokemon is either put on the bench or replaced,
+     * and the new Pokemon is set as active. Messages are printed to indicate the action.
+     *
+     * @param player The player who is switching Pokemon.
+     * @param switchingIn The Pokemon card that is being switched in as active.
+     */
     public void switchPokemon(Player player, Card switchingIn){
         Optional<Card> energyCard = player.hand.stream().filter(card -> card instanceof Energy).findAny();
         Pokemon currentActive = (Pokemon) player.active;
@@ -278,6 +346,14 @@ public class CardGame {
         System.out.println("You don't have any Energy in your hand! It cost one Energy to switch out your Pokemon!");
     }
 
+    /**
+     * Plays a Trainer card from the player's hand, applying its ability to the opponent.
+     * The Trainer card is moved to the player's discard pile after being played.
+     *
+     * @param self The player who is playing the Trainer card.
+     * @param opponent The opponent who is affected by the Trainer card's ability.
+     * @param trainerCard The Trainer card being played.
+     */
     public void playTrainerCard(Player self, Player opponent, Card trainerCard){
         Trainer trainer = (Trainer) trainerCard;
         self.discardPile.add(trainerCard);
@@ -286,16 +362,39 @@ public class CardGame {
         System.out.println(self.getName() + " has played " + trainer.getCardName() + "!");
     }
 
+    /**
+     * Sets a specified Pokemon card from the player's bench as the active Pokemon.
+     * The Pokemon is removed from the bench after being set as active.
+     *
+     * @param player The player whose active Pokemon is being changed.
+     * @param pokemon The Pokemon card being added to the active position.
+     */
     public void addPokemonToActiveFromBench(Player player, Card pokemon){
         player.active = pokemon;
         player.bench.remove(pokemon);
     }
 
+    /**
+     * Sets a specified Pokemon card from the player's hand as the active Pokemon.
+     * The Pokemon is removed from the hand after being set as active.
+     *
+     * @param player The player whose active Pokemon is being changed.
+     * @param pokemon The Pokemon card being added to the active position.
+     */
     public void addPokemonToActiveFromHand(Player player, Card pokemon){
         player.active = pokemon;
         player.hand.remove(pokemon);
     }
 
+    /**
+     * Uses a specified ability on the opponent, applying its effects.
+     * If the opponent's active Pokemon is knocked out, a prize is drawn,
+     * and the opponent is prompted to switch to a new active Pokemon.
+     *
+     * @param self The player using the Pokemon ability.
+     * @param opponent The opponent who is affected by the ability.
+     * @param ability The ability being used.
+     */
     public void usePokemonAbility(Player self, Player opponent, Ability ability){
         var action = ability.getAction();
         action.apply(opponent, self);
@@ -328,17 +427,40 @@ public class CardGame {
         }
     }
 
+    /**
+     * Checks if the player currently has an active Pokemon.
+     * A Pokemon is considered active if its name is not "No Active!".
+     *
+     * @param player The player whose active status is being checked.
+     * @return True if the player has an active Pokemon; false otherwise.
+     */
     public boolean hasActive(Player player){
         Pokemon currentActive = (Pokemon) player.active;
         return !currentActive.getName().equals("No Active!");
     }
 
+    /**
+     * Determines if the specified player is the winner of the game.
+     * A player is considered a winner if their prize pile is empty or
+     * if the opponent has no active Pokemon and no Pokemon in hand or bench.
+     *
+     * @param self The player being checked for victory.
+     * @param opponent The opposing player.
+     * @return True if the specified player is a winner; false otherwise.
+     */
     public boolean isWinner(Player self, Player opponent){
         return self.prizes.isEmpty() || (opponent.hand.stream().noneMatch(card -> card instanceof Pokemon)
                 && opponent.bench.stream().noneMatch(card -> card instanceof Pokemon) && !hasActive(opponent));
     }
 
-
+    /**
+     * Displays the available Pokemon cards in the player's hand.
+     * The player can select a Pokemon card by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param player The player whose hand is being displayed.
+     * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
+     */
     public Optional<Card> DisplayPokemonInHand(Player player){
         System.out.println("Available Pokemon in Hand:\n");
         ArrayList<Card> pokemonCards = new ArrayList<>();
@@ -374,6 +496,14 @@ public class CardGame {
         return Optional.empty();
     }
 
+    /**
+     * Displays the available Pokemon cards in the player's bench.
+     * The player can select a Pokemon card by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param player The player whose bench is being displayed.
+     * @return An Optional containing the selected Pokemon card, or an empty Optional if the player chooses to go back.
+     */
     public Optional<Card> DisplayPokemonInBench(Player player){
         System.out.println("Available Pokemon in Bench:\n");
         ArrayList<Card> pokemonCards = new ArrayList<>();
@@ -409,6 +539,14 @@ public class CardGame {
         return Optional.empty();
     }
 
+    /**
+     * Displays the abilities of a specified Pokemon.
+     * The player can select an ability by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param pokemon The Pokemon whose abilities are being displayed.
+     * @return An Optional containing the selected ability, or an empty Optional if the player chooses to go back.
+     */
     public Optional<Ability> DisplayAbilities(Pokemon pokemon){
         ArrayList<Ability> abilities = pokemon.getAbilities();
         for(int i = 0; i < abilities.size(); i++){
@@ -437,6 +575,14 @@ public class CardGame {
         }
     }
 
+    /**
+     * Displays the available Trainer cards in the player's hand.
+     * The player can select a Trainer card by entering its corresponding number.
+     * If the player chooses to go back, an empty Optional is returned.
+     *
+     * @param player The player whose Trainer cards are being displayed.
+     * @return An Optional containing the selected Trainer card, or an empty Optional if the player chooses to go back.
+     */
     public Optional<Card> DisplayTrainerCards(Player player) {
         System.out.println("Available Trainer Cards in Hand:\n");
         ArrayList<Card> trainerCards = new ArrayList<>();
@@ -473,6 +619,12 @@ public class CardGame {
         return Optional.empty();
     }
 
+    /**
+     * Switches the current player to the opponent and resets action flags.
+     * If the current player is player1, it changes the current player to player2
+     * and sets player1 as the opponent. It also resets the flags for attack, energy attachment,
+     * and trainer card play to false.
+     */
     public void switchCurrentPlayer(){
         if(player1 == currentPlayer){
             currentPlayer = player2;
@@ -487,6 +639,13 @@ public class CardGame {
         hasPlayedTrainer = false;
     }
 
+    /**
+     * Displays the available options for the current player and processes their selection.
+     * The player can choose to attack, attach energy, play a trainer card, bench a Pokémon from hand,
+     * switch active Pokémon with one from the bench, display game info, or end their turn.
+     *
+     * @return True if the current player wins the game after their turn, false otherwise.
+     */
     public boolean DisplayOptions(){
         while(true) {
             System.out.println("What will you do, " + currentPlayer.getName() +"?\n");
@@ -584,6 +743,9 @@ public class CardGame {
         }
     }
 
+    /**
+     * Sets up the game by prompting players to enter their names.
+     */
     public void SetupGame(){
         System.out.println("Enter a name for Player 1.");
         String player1Name = gameInput.nextLine();
@@ -592,6 +754,10 @@ public class CardGame {
         CreatePlayers(player1Name, player2Name);
     }
 
+    /**
+     * Displays the current game information, including the active Pokémon, bench Pokémon,
+     * and the number of cards in each player's deck and hand.
+     */
     public void DisplayGameInfo(){
         System.out.println("----------------------------------------------");
         System.out.println(player1.getName() + "'s Board:");
@@ -619,7 +785,7 @@ public class CardGame {
     }
 
     /**
-     *
+     * Starts the game loop, alternating turns between players until there is a winner.
      */
     public void PlayGame(){
         SetupGame();
