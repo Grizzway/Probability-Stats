@@ -16,4 +16,7 @@ public class Trainer extends Card{
         this.ability = ability;
     }
 
+    public String getCardName() {
+        return cardName;
+    }
 }

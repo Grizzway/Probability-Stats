@@ -1,4 +1,4 @@
 package PokemonAssignment;
 
-public class Card {
+public abstract class Card {
 }

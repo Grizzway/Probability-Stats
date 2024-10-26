@@ -7,34 +7,33 @@ public class Pokemon extends Card {
     private String name;
     private int hp;
     private int attachedEnergy = 0;
-    private Type pokemonType;
     private ArrayList<Ability> abilities = new ArrayList<>();
 
-    public enum Type{
-        Fire,
-        Water,
-        Colorless,
-        Lightning,
-        Fighting
-    }
     public Pokemon(){
 
     }
 
-    public Pokemon(String name, int hp, Type pokemonType, ArrayList<Ability> abilities){
+    public Pokemon(String name, int hp, ArrayList<Ability> abilities){
         this.name = name;
         this.hp = hp;
         this.abilities = abilities;
     }
 
-
+    public Pokemon(String name) {
+        this.name = name;
+    }
 
     public Pokemon(String name, int hp){
         this.name = name;
         this.hp = hp;
     }
+
+
     public String getName(){
         return name;
+    }
+    public void setName(String name){
+        this.name = name;
     }
 
     public int getHp(){
@@ -53,8 +52,7 @@ public class Pokemon extends Card {
         this.attachedEnergy = energy;
     }
 
-    public void DisplayAbilities(){
-        System.out.println(name + "'s abilities:");
-
+    public ArrayList<Ability> getAbilities(){
+        return abilities;
     }
 }

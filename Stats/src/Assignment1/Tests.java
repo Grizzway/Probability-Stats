@@ -21,6 +21,13 @@ public class Tests {
 		System.out.println(s_lib.Factorial(50));
 		System.out.println(s_lib.Permutations(4,4));
 		System.out.println(s_lib.Combinations(2,5));
+		System.out.println(s_lib.BinomialDistributionPMF(0.8, 10,7));
+		System.out.println(s_lib.BinomialDistributionExpected(1,0.5));
+		System.out.println(s_lib.BinomialDistributionVariance(1,0.5));
+		System.out.println(s_lib.BinomialDistributionStandardDeviation(1,0.5));
+		System.out.println(s_lib.GeometricDistributionExpected(1,0.5));
+		System.out.println(s_lib.GeometricDistributionVariance(1,0.5));
+		System.out.println(s_lib.GeometricDistributionStandardDeviation(1,0.5));
 
 
 

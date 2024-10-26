@@ -10,30 +10,30 @@ public class PokemonCards {
     public static Random random = new Random();
     public static ArrayList<Pokemon> pokemonCards;
 
-    private static final Pokemon Charmander = new Pokemon("Charmander", 50, Pokemon.Type.Fire,
+    private static final Pokemon Charmander = new Pokemon("Charmander", 50,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("Scratch", 1, PokemonCards::Scratch),
                     new Ability("Ember", 2, PokemonCards::Ember))));
 
-    private final static Pokemon Pikachu = new Pokemon("Pikachu", 60, Pokemon.Type.Lightning,
+    private final static Pokemon Pikachu = new Pokemon("Pikachu", 60,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("Iron Tail", 2, PokemonCards::IronTail))));
 
-    private final static Pokemon Arceus = new Pokemon("Arceus", 80, Pokemon.Type.Fighting,
+    private final static Pokemon Arceus = new Pokemon("Arceus", 80,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("Break Ground",3, PokemonCards::BreakGround))));
 
-    private final static Pokemon Chatot = new Pokemon("Chatot", 70, Pokemon.Type.Colorless,
+    private final static Pokemon Chatot = new Pokemon("Chatot", 70,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("Tackle", 1, PokemonCards::Tackle),
                     new Ability("Wave Splash", 2, PokemonCards::WaveSplash))));
 
-    private final static Pokemon Buizel = new Pokemon("Buizel", 70, Pokemon.Type.Water,
+    private final static Pokemon Buizel = new Pokemon("Buizel", 70,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("A Capella", 1, PokemonCards::ACapella),
                     new Ability("Gust", 1, PokemonCards::Gust))));
 
-    private final static Pokemon Mudkip = new Pokemon("Mudkip", 70, Pokemon.Type.Water,
+    private final static Pokemon Mudkip = new Pokemon("Mudkip", 70,
             new ArrayList<Ability>(Arrays.asList(
                     new Ability("Quick Attack", 1, PokemonCards::QuickAttack))));
 
@@ -157,10 +157,10 @@ public class PokemonCards {
         }
 
         System.out.println(attacker.getName() + " uses Wave A Capella!");
-        int cardsFound = 0;
         ArrayList<Card> foundCards = new ArrayList<>();
-        for(Card card : self.deck){
-            if(card instanceof Pokemon && cardsFound < 3){
+        int cardsFound = 0;
+        for(int i = 0; !self.deck.isEmpty(); i++){
+            if(self.deck.get(i) instanceof Pokemon card){
                 cardsFound++;
                 foundCards.add(card);
                 self.deck.remove(card);

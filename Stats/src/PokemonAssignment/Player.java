@@ -9,10 +9,14 @@ public class Player {
     public ArrayList<Card> discardPile = new ArrayList<>();
     public ArrayList<Card> prizes = new ArrayList<>();
     public ArrayList<Card> bench = new ArrayList<>();
-    public Card active = new Pokemon();
+    public Card active = new Pokemon("No Active!");
 
     public Player(){
 
+    }
+
+    public Player(String name){
+        this.name = name;
     }
 
     public Player(String name, ArrayList<Card> deck, ArrayList<Card> hand, ArrayList<Card> discardPile){

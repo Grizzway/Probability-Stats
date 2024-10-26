@@ -17,12 +17,12 @@ public class Ability {
         return name;
     }
 
+    public int getRequiredEnergy() {
+        return requiredEnergy;
+    }
+
     public BiFunction<Player, Player, Void> getAction() {
         return action;
     }
 
-    // Execute the ability
-    public void use(Player user, Player target) {
-        action.apply(user, target);
-    }
 }

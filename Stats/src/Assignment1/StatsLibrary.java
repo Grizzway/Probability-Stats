@@ -106,4 +106,61 @@ public class StatsLibrary {
 	public double nonExclusiveUnion(double probA, double probB, double intersectionProb) {
 		return probA + probB - intersectionProb;
 	}
+
+	public double DiscreteExpected(ArrayList<Double> listOfProbabilities){
+		double expected = 0.0;
+
+		for (int i = 0; i < listOfProbabilities.size(); i++){
+			expected += (i +1) * listOfProbabilities.get(i);
+		}
+		return expected;
+	}
+
+	public double DiscreteVariance(ArrayList<Double> listOfProbabilities){
+		double expected = DiscreteExpected(listOfProbabilities);
+		double variance = 0.0;
+
+		for (int i = 0; i < listOfProbabilities.size(); i++){
+			variance += listOfProbabilities.get(i) * Math.pow((i+1) - expected, 2);
+		}
+		return variance;
+	}
+
+	public double DiscreteStandardDeviation(ArrayList<Double> listOfProbabilities){
+		return Math.sqrt(DiscreteVariance(listOfProbabilities));
+	}
+
+	public double BinomialDistributionPMF(double probability, int totalTrials, int trial){
+		return Combinations(trial, totalTrials).intValue()
+				* (Math.pow(probability, trial))
+				* (Math.pow(1-probability, totalTrials-trial));
+	}
+
+	public double BinomialDistributionExpected(int totalTrials, double probability){
+		return totalTrials*probability;
+	}
+
+	public double BinomialDistributionVariance(int totalTrials, double probability){
+		return BinomialDistributionExpected(totalTrials,probability) * (1 - probability);
+	}
+
+	public double BinomialDistributionStandardDeviation(int totalTrials, double probability){
+		return Math.sqrt(BinomialDistributionVariance(totalTrials,probability));
+	}
+
+	public double GeometricDistributionPMF(double probability, int totalTrials){
+		return Math.pow(1-probability, totalTrials-1) * probability;
+	}
+
+	public double GeometricDistributionExpected(int totalTrials, double probability){
+		return totalTrials/probability;
+	}
+
+	public double GeometricDistributionVariance(int totalTrials, double probability){
+		return (1-probability) / Math.pow(probability,2);
+	}
+
+	public double GeometricDistributionStandardDeviation(int totalTrials, double probability){
+		return Math.sqrt(GeometricDistributionVariance(totalTrials, probability));
+	}
 }
