@@ -1,6 +1,6 @@
 # Probability & Stats
 
-This repo is for my CSCI-3327 class. It is meant to show off various implementations of stats functions as well as different case scenarios to use them. Alongside this, is a functional Pokemon Trading Card game. 
+This repo is for my CSCI-3327 class. It is meant to show off various implementations of stats functions as well as different case scenarios to use them. Alongside this, is a (mostly) functional Pokemon Trading Card game. 
 
 Below you can find various samples of the code functioning.
 
