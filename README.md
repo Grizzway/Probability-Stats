@@ -165,7 +165,7 @@ The game concludes when one player runs out of prize cards or their opponent has
 
 ## Stats Library (Continued)
 
-The statistics library computes various statistical measures and distributions based on provided data sets and parameters. Below are the results obtained from several calculations:
+This is a continued version of my previous stats library now with the new functions from the [Function Sheet 2](https://github.com/Grizzway/Probability-Stats/blob/master/Function%20Sheet%202.pdf)
 
 1. **Negative Binomial Distribution**:
    - **Negative Binomial Probability (5 successes, 3 trials, p = 0.4)**: 0.0774 (approximately).
@@ -199,15 +199,15 @@ The statistics library computes various statistical measures and distributions b
    ![](https://i.imgur.com/sZ6Scaa.png)
 
 ## Salting/Smoothing Program & Learning MatLab
-Check the folder labeled "PlotterDatas" to see the full list of generated data. In this folder there are two folders labeled "GeneratedData" and "CompiledData. Generated Data is what was made by the program, and CompiledData is all of the steps (Generated,Salting,Smoothing) for each trial. 
+Check the folder labeled ["PlotterDatas"](https://github.com/Grizzway/Probability-Stats/tree/master/PlotterDatas) to see the full list of generated data. In this folder there are two folders labeled ["GeneratedData"](https://github.com/Grizzway/Probability-Stats/tree/master/PlotterDatas/GeneratedData) and ["CompiledData](https://github.com/Grizzway/Probability-Stats/tree/master/PlotterDatas/CompiledData). Generated Data is what was made by the program, and CompiledData is all of the steps (Generated,Salting,Smoothing) for each trial. 
 
 I also used JFreeChart to chart the data without the need of excel. The screenshot of the output is shown below:
 ![](https://i.imgur.com/I0er92a.png)
 
-I also learned Matlab. I took the Official MatLab Onboarding course and the Certificate for that is in the project files along with everything else.
+I also learned Matlab. I took the Official MatLab Onboarding course and the [Certificate](https://github.com/Grizzway/Probability-Stats/blob/master/MatLab/MatLabcertificate.pdf) for that is in the project files along with everything else.
 ![](https://i.imgur.com/3XjfSoc.png)
 
-With MatLab, I learned how the syntax worked and how to plot graphs. I wrote some code to plot the graphs for the first generated Trial data.
+With MatLab, I learned how the syntax worked and how to plot graphs. I wrote [some code](https://github.com/Grizzway/Probability-Stats/tree/master/MatLab) to plot the graphs for the first generated Trial data.
 ![](https://i.imgur.com/g2TtJ5S.png)
 
 ## Dataset Project
@@ -217,10 +217,10 @@ Here is an example of the dataset:
 
 ![](https://i.imgur.com/rp5ubGl.png)
 
-More of this can be found in the "CO2 PPM Data.csv" and "SectionQuestions.pdf" where I went and made a bunch of questions regarding this data.
+More of this can be found in the ["CO2 PPM Data.csv"](https://github.com/Grizzway/Probability-Stats/blob/master/CO2%20PPM%20Data.csv) and ["SectionQuestions.pdf"](https://github.com/Grizzway/Probability-Stats/blob/master/SectionQuestions.pdf) where I went and made a bunch of questions regarding this data.
 
 ## Android Pokemon Game App
 
-See contents of "Journey With Android Studio.pdf"
+See contents of ["Journey With Android Studio.pdf"](https://github.com/Grizzway/Probability-Stats/blob/master/Journey%20With%20Android%20Studio.pdf)
 
 </details>
