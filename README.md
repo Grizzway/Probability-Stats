@@ -2,7 +2,10 @@
 
 This repo is for my CSCI-3327 class. It is meant to show off various implementations of stats functions as well as different case scenarios to use them. Alongside this, is a (mostly) functional Pokemon Trading Card game. 
 
-Below you can find various samples of the code functioning.
+Below you can find various samples of the code functioning. Click one of the dropdowns to see the two halves of the project.
+
+<details>
+  <summary>First Half of Project</summary>
 
 ## Assignment 1 - Stats Library & Set Operations
 ### Stats Library
@@ -154,3 +157,69 @@ This section features a full-fledged Pokémon trading card game (not implemented
 The game concludes when one player runs out of prize cards or their opponent has no Pokémon left to play.
 
 ![](https://i.imgur.com/g9dlFaq.png)
+
+</details>
+
+<details>
+  <summary>Second Half of Project</summary>
+
+## Stats Library (Continued)
+
+The statistics library computes various statistical measures and distributions based on provided data sets and parameters. Below are the results obtained from several calculations:
+
+1. **Negative Binomial Distribution**:
+   - **Negative Binomial Probability (5 successes, 3 trials, p = 0.4)**: 0.0774 (approximately).
+   - **Negative Binomial Probability (5 successes, 2 trials, p = 0.3)**: 0.0179 (approximately).
+   - **Negative Binomial Mean (r = 3, p = 0.5)**: 6.0.
+   - **Negative Binomial Standard Deviation (r = 3, p = 0.5)**: 2.449 (approximately).
+   
+   ![](https://i.imgur.com/fHYCNge.png)
+
+2. **Hypergeometric Distribution**:
+   - **Hypergeometric Probability (2 successes, 5 successes in population, 3 draws, population size = 10)**: 0.0.
+   - **Hypergeometric Probability (50 successes, 10 successes in population, 5 draws, population size = 2)**: 0.2098 (approximately).
+   - **Hypergeometric Mean (successes = 20, draws = 10, population size = 50)**: 4.0.
+   - **Hypergeometric Standard Deviation (successes = 20, draws = 10, population size = 50)**: 1.400 (approximately).
+   
+   ![](https://i.imgur.com/5bigX72.png)
+
+3. **Poisson Distribution**:
+   - **Poisson Probability (λ = 5.0, k = 10)**: 0.0181 (approximately).
+   
+   ![](https://i.imgur.com/KMHdPhZ.png)
+
+4. **Uniform Distribution**:
+   - **Uniform Probability (a = 1.0, b = 5.0, x = 3.0)**: 0.25.
+   
+   ![](https://i.imgur.com/KgXUW5X.png)
+
+5. **Exponential Distribution**:
+   - **Exponential Probability (λ = 2.0, x = 3.0)**: 0.1116 (approximately).
+   
+   ![](https://i.imgur.com/sZ6Scaa.png)
+
+## Salting/Smoothing Program & Learning MatLab
+Check the folder labeled "PlotterDatas" to see the full list of generated data. In this folder there are two folders labeled "GeneratedData" and "CompiledData. Generated Data is what was made by the program, and CompiledData is all of the steps (Generated,Salting,Smoothing) for each trial. 
+
+I also used JFreeChart to chart the data without the need of excel. The screenshot of the output is shown below:
+![](https://i.imgur.com/I0er92a.png)
+
+I also learned Matlab. I took the Official MatLab Onboarding course and the Certificate for that is in the project files along with everything else.
+![](https://i.imgur.com/3XjfSoc.png)
+
+With MatLab, I learned how the syntax worked and how to plot graphs. I wrote some code to plot the graphs for the first generated Trial data.
+![](https://i.imgur.com/g2TtJ5S.png)
+
+## Dataset Project
+
+The dataset I used for this project was a collection of the average CO2 PPM in the atmosphere for each month from January 1979 until August 2024. 
+Here is an example of the dataset:
+![](https://i.imgur.com/rp5ubGl.png)
+
+More of this can be found in the "CO2 PPM Data.csv" and "SectionQuestions.pdf" where I went and made a bunch of questions regarding this data.
+
+## Android Pokemon Game App
+
+See contents of "Journey With Android Studio.pdf"
+
+</details>
