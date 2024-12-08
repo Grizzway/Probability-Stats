@@ -214,6 +214,7 @@ With MatLab, I learned how the syntax worked and how to plot graphs. I wrote som
 
 The dataset I used for this project was a collection of the average CO2 PPM in the atmosphere for each month from January 1979 until August 2024. 
 Here is an example of the dataset:
+
 ![](https://i.imgur.com/rp5ubGl.png)
 
 More of this can be found in the "CO2 PPM Data.csv" and "SectionQuestions.pdf" where I went and made a bunch of questions regarding this data.
