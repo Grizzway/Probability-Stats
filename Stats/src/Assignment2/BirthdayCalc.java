@@ -1,6 +1,6 @@
 package Assignment2;
 
-import Assignment1.StatsLibrary;
+import StatsLibrary.StatsLibrary;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,11 +1,17 @@
-package Assignment1;
+package StatsLibrary;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 public class StatsLibrary {
+
+	/*
+	 * Section 1
+	 */
 
 	/**
 	 * Calculates the mean (average) of an ArrayList of integers.
@@ -135,7 +141,7 @@ public class StatsLibrary {
 	 * @param totalAmount Total number of elements.
 	 * @return Number of combinations as a BigInteger.
 	 */
-	public BigInteger Combinations(int pickAmount, int totalAmount){
+	public BigInteger Combinations(int pickAmount, int totalAmount) {
 		return Permutations(pickAmount, totalAmount).divide(Factorial(pickAmount));
 	}
 
@@ -339,4 +345,141 @@ public class StatsLibrary {
 	public double GeometricDistributionStandardDeviation(int totalTrials, double probability){
 		return Math.sqrt(GeometricDistributionVariance(totalTrials, probability));
 	}
+
+	/*
+	* Section 2
+	*/
+
+	/**
+	 * Calculates the probability for the Negative Binomial Distribution.
+	 *
+	 * @param k The number of trials.
+	 * @param r The number of successes (r).
+	 * @param p The probability of success (p).
+	 * @return The probability p(y) as a double.
+	 */
+	public BigDecimal NegativeBinomialProbability(int r, int k, double p) {
+		if (r < 0 || k < 0 || p < 0.0 || p > 1.0) {
+			return BigDecimal.ZERO; // Invalid parameters
+		}
+
+		BigInteger combinations = Combinations(k, k + r - 1); // Binomial coefficient
+		BigDecimal pSuccess = BigDecimal.valueOf(p).pow(r); // p^r
+		BigDecimal pFailure = BigDecimal.valueOf(1 - p).pow(k); // (1-p)^k
+
+		return new BigDecimal(combinations).multiply(pSuccess).multiply(pFailure);
+	}
+
+
+	/**
+	 * Calculates the mean for the Negative Binomial Distribution.
+	 *
+	 * @param r The number of successes (r).
+	 * @param p The probability of success (p).
+	 * @return The mean μ.
+	 */
+	public double NegativeBinomialMean(int r, double p) {
+		return r / p;
+	}
+
+	/**
+	 * Calculates the standard deviation for the Negative Binomial Distribution.
+	 *
+	 * @param r The number of successes (r).
+	 * @param p The probability of success (p).
+	 * @return The standard deviation σ.
+	 */
+	public double NegativeBinomialStandardDeviation(int r, double p) {
+		return Math.sqrt(r * (1 - p) / (p * p));
+	}
+
+	/**
+	 * Calculates the probability for the Hypergeometric Distribution.
+	 *
+	 * @param N The total population size (N).
+	 * @param K The number of successes in the population (K).
+	 * @param n The sample size (n).
+	 * @param k The number of successes observed (k).
+	 * @return The probability p(k) as a BigDecimal.
+	 */
+	public BigDecimal HypergeometricProbability(int N, int K, int n, int k) {
+		// Input validation
+		if (k < 0 || k > K || k > n || K < 0 || N < 0 || n > N) {
+			return BigDecimal.ZERO; // Invalid parameters
+		}
+
+		// Calculate combinations for the numerator and denominator
+		BigInteger numerator = Combinations(k, K).multiply(Combinations(n - k, N - K)); // \binom{K}{k} * \binom{N-K}{n-k}
+		BigInteger denominator = Combinations(n, N); // \binom{N}{n}
+
+		// Return the probability as a BigDecimal with increased precision
+        return new BigDecimal(numerator).divide(new BigDecimal(denominator), 6, RoundingMode.HALF_UP);
+	}
+
+	/**
+	 * Calculates the mean for the Hypergeometric Distribution.
+	 *
+	 * @param r The number of successes in the population (r).
+	 * @param n The sample size (n).
+	 * @param N The total population size (N).
+	 * @return The mean μ.
+	 */
+	public double HypergeometricMean(int r, int n, int N) {
+		return (n * r) / (double) N;
+	}
+
+	/**
+	 * Calculates the standard deviation for the Hypergeometric Distribution.
+	 *
+	 * @param r The number of successes in the population (r).
+	 * @param n The sample size (n).
+	 * @param N The total population size (N).
+	 * @return The standard deviation σ.
+	 */
+	public double HypergeometricStandardDeviation(int r, int n, int N) {
+		double numerator = n * (r / (double) N) * (1 - r / (double) N) * (N - n) / (double) (N - 1);
+		return Math.sqrt(numerator);
+	}
+
+	/**
+	 * Calculates the probability for the Poisson Distribution.
+	 *
+	 * @param y The number of occurrences (y).
+	 * @param lambda The expected number of occurrences (λ).
+	 * @return The probability p(y) as a double.
+	 */
+	public double PoissonProbability(int y, double lambda) {
+		return (Math.pow(lambda, y) * Math.exp(-lambda)) / Factorial(y).doubleValue();
+	}
+
+	/**
+	 * Calculates the probability for the Uniform Distribution.
+	 *
+	 * @param y The random variable value.
+	 * @param theta1 The lower bound (Θ1).
+	 * @param theta2 The upper bound (Θ2).
+	 * @return The probability density f(y).
+	 */
+	public double uniformProbability(double y, double theta1, double theta2) {
+		if (y >= theta1 && y <= theta2) {
+			return 1 / (theta2 - theta1);
+		}
+		return 0;
+	}
+
+
+	/**
+	 * Calculates the probability density for the Exponential Distribution.
+	 *
+	 * @param y The random variable value.
+	 * @param beta The rate parameter (β).
+	 * @return The probability density f(y).
+	 */
+	public double exponentialProbability(double y, double beta) {
+		if (y >= 0) {
+			return (1 / beta) * Math.exp(-y / beta);
+		}
+		return 0;
+	}
+
 }

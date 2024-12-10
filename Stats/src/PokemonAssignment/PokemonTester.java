@@ -12,6 +12,6 @@ public class PokemonTester {
         //System.out.println("The average probability of picking one pokemon in your hand over 1000 runs is: " + game.MonteCarloOnePokemon(1000));
         //game.MonteCarloEngine(1000);
         //game.MonteCarloPrizes(10000);
-        //game.PlayGame();
+        game.PlayGame();
     }
 }

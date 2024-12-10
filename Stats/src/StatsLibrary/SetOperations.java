@@ -1,4 +1,4 @@
-package Assignment1;
+package StatsLibrary;
 
 import java.util.ArrayList;
 import java.util.Collections;
